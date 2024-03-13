@@ -4,11 +4,11 @@ phases:
     runtime-versions:
       python: 3.9
   build:
-    commands:
+    commands:  #Zip the lambda code as a zip file
       - echo "Zipping deployment package..."
       - zip -g deployment_package.zip lambda.py
   post_build:
     commands:
-      - echo "Updating lambda Function..."
+      - echo "Updating lambda Function..." # Here aws cli do the deployment
       - aws lambda update-function-code --function-name lambda-ApiFunction-O8zKYrFXyrB1 --zip-file fileb://deployment_package.zip --region us-east-1 
       - echo "DONE!!"
